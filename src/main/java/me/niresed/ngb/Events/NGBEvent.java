@@ -1,6 +1,5 @@
 package me.niresed.ngb.Events;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.server.PluginEvent;
 import org.bukkit.plugin.Plugin;

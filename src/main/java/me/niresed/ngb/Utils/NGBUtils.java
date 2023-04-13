@@ -12,17 +12,12 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
 public class NGBUtils extends JavaPlugin implements Listener {
-    private final Random random = new Random();
-
     // plugin
     private static final Plugin plugin = NGB.getPlugin(NGB.class);
-    // coordinate, in config.yml
-    private static final ArrayList<Integer> coordinate = (ArrayList<Integer>) plugin.getConfig().getIntegerList("zone");
     // trueBlocks, blocks on which can spawn reeds
     private static final HashSet<Material> trueBlocks = new HashSet<>();
 
@@ -34,24 +29,25 @@ public class NGBUtils extends JavaPlugin implements Listener {
         trueBlocks.add(Material.DIRT);
     }
 
-    public static Location generateLocation(){
+    public static Location generateLocation(int count){
+        ArrayList<Integer> coordinate = (ArrayList<Integer>) plugin.getConfig().getIntegerList("zone_" + count);
+        System.out.println(coordinate);
         World world = Bukkit.getWorld("world");
-        Location location1 = new Location(world, 0, 0, 0);
-        Location location = generateRandomLocation(world);
+        Location location = generateRandomLocation(world, coordinate);
         for (int i = 0; i < 30; i++){
             boolean isLocationSafeCheck = isLocationSafe(location);
             boolean isLocationHasWaterInNearby = placeSugarCane(location.getWorld().getBlockAt((int) location.getX(), (int) location.getY() - 1, (int) location.getZ()));
             if (!(isLocationSafeCheck) || !(isLocationHasWaterInNearby)){
-                location = generateRandomLocation(world);
+                location = generateRandomLocation(world, coordinate);
             } else{
                 return location;
             }
         }
+        location.setY(0);
         return location;
     }
 
-    private static Location generateRandomLocation(World world){
-        Random random = new Random();
+    private static Location generateRandomLocation(World world, ArrayList<Integer> coordinate){
         int minX = coordinate.get(0), minZ = coordinate.get(1);
         int maxX = coordinate.get(2), maxZ = coordinate.get(3);
         int x = (int) Math.floor(Math.random() * (maxX - minX + 1) + minX);
@@ -71,7 +67,7 @@ public class NGBUtils extends JavaPlugin implements Listener {
         Block below = location.getWorld().getBlockAt(x, y - 1, z);
         Block above = location.getWorld().getBlockAt(x, y + 1, z);
         Block above2x = location.getWorld().getBlockAt(x, y + 2, z);
-        return !(!(trueBlocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid()));
+        return !(!(trueBlocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid()) || (above2x.getType().isSolid()));
     }
 
     private static boolean placeSugarCane(Block block) {
