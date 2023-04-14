@@ -15,6 +15,7 @@ public class GenerateEvent implements Listener {
     public int count = 0;
     @EventHandler
     public void GenerateBlock(NGBEvent event){
+        System.out.println("Hello");
         if (count < plugin.getConfig().getInt("how many zones")){
             count += 1;
         } else {
