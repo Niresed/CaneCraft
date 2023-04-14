@@ -79,7 +79,8 @@ public class MainUtils extends JavaPlugin implements Listener {
         Block below = location.getWorld().getBlockAt(x, y - 1, z);
         Block above = location.getWorld().getBlockAt(x, y + 1, z);
         Block above2x = location.getWorld().getBlockAt(x, y + 2, z);
-        return !(!(trueBlocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid()) || (above2x.getType().isSolid()));
+        return !(!(trueBlocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid()) || (above2x.getType().isSolid())
+                || (block.getType() == Material.SUGAR_CANE));
     }
 
     private static boolean placeSugarCane(Block block) {
