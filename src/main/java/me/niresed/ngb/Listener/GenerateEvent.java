@@ -20,9 +20,9 @@ public class GenerateEvent implements Listener {
     @EventHandler
     public void GenerateBlock(TimerEvent event){
         if (numberRepetitions <= max){
+            numberRepetitions++;
             if (runTimer){
                 max = 5 * plugin.getConfig().getInt("how many zones");
-                numberRepetitions++;
                 if (count < plugin.getConfig().getInt("how many zones")){
                     count += 1;
                 } else {
