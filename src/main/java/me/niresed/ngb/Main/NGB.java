@@ -1,5 +1,6 @@
 package me.niresed.ngb.Main;
 
+import me.niresed.ngb.Commands.BlockSwitch;
 import me.niresed.ngb.Events.TimerEvent;
 import me.niresed.ngb.Listener.GenerateEvent;
 import org.bukkit.Bukkit;
@@ -7,13 +8,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
-public final class CaneCraft extends JavaPlugin implements Listener {
+import java.util.Objects;
+
+public final class NGB extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new GenerateEvent(), this);
+        Objects.requireNonNull(getCommand("BlockSwitch")).setExecutor(new BlockSwitch());
+
         timer();
     }
     public void timer(){
@@ -25,7 +30,7 @@ public final class CaneCraft extends JavaPlugin implements Listener {
             public void run() {
                 Bukkit.getServer().getPluginManager().callEvent(event);
             }
-        }, 1200L / countZones, 1200L / countZones);
+        }, 120L / countZones, 120L / countZones);
     }
     @Override
     public void onDisable() {

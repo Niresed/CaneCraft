@@ -3,7 +3,5 @@ version: '${project.version}'
 main: me.niresed.ngb.Main.NGB
 api-version: 1.16
 commands:
-  NGBOn:
-    description: it is ngbon
-  NGBOff:
-    description: it is ngboff
+  BlockSwitch:
+    description: NGB on/off
