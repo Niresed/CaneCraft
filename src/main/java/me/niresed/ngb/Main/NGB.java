@@ -30,7 +30,7 @@ public final class NGB extends JavaPlugin implements Listener {
             public void run() {
                 Bukkit.getServer().getPluginManager().callEvent(event);
             }
-        }, 120L / countZones, 120L / countZones);
+        }, 1200L / countZones, 1200L / countZones);
     }
     @Override
     public void onDisable() {
