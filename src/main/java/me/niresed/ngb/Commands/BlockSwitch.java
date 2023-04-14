@@ -14,12 +14,16 @@ public class BlockSwitch implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            if (args[0].equals("on")){
-                GenerateEvent.runTimer = true;
-            } else if (args[0].equals("off")) {
-                GenerateEvent.runTimer = false;
+            if (player.hasPermission("ngb.gcane")){
+                if (args[0].equals("on")){
+                    GenerateEvent.runTimer = true;
+                } else if (args[0].equals("off")) {
+                    GenerateEvent.runTimer = false;
+                } else {
+                    player.sendMessage(ChatColor.RED + "Wrong command");
+                }
             } else {
-                player.sendMessage(ChatColor.RED + "Wrong command");
+                player.sendMessage(ChatColor.RED + "You haven't permission for this command");
             }
         } else {
             if (args[0].equals("on")){
