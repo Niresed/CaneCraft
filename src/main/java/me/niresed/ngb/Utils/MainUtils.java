@@ -1,6 +1,6 @@
 package me.niresed.ngb.Utils;
 
-import me.niresed.ngb.Main.NGB;
+import me.niresed.ngb.Main.CaneCraft;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,11 +13,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
 
-public class NGBUtils extends JavaPlugin implements Listener {
+public class MainUtils extends JavaPlugin implements Listener {
     // plugin
-    private static final Plugin plugin = NGB.getPlugin(NGB.class);
+    private static final Plugin plugin = CaneCraft.getPlugin(CaneCraft.class);
     // trueBlocks, blocks on which can spawn reeds
     private static final HashSet<Material> trueBlocks = new HashSet<>();
 
