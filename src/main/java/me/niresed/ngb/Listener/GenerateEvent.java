@@ -18,7 +18,7 @@ public class GenerateEvent implements Listener {
         if (count < plugin.getConfig().getInt("how many zones")){
             count += 1;
         } else {
-            count = 0;
+            count = 1;
         }
         Location location = NGBUtils.generateLocation(count);
         if(location.getY() != 0){
