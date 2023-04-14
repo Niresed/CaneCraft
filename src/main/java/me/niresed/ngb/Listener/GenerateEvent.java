@@ -15,14 +15,14 @@ public class GenerateEvent implements Listener {
     private static final Plugin plugin = NGB.getPlugin(NGB.class);
     public int count = 0;
     public int numberRepetitions = 0;
-    public int max = 2 * plugin.getConfig().getInt("how many zones");
+    public int max = 3 * plugin.getConfig().getInt("how many zones");
     public static boolean runTimer = true;
     @EventHandler
     public void GenerateBlock(TimerEvent event){
         if (numberRepetitions <= max){
             numberRepetitions++;
             if (runTimer){
-                max = 5 * plugin.getConfig().getInt("how many zones");
+                max = 3 * plugin.getConfig().getInt("how many zones");
                 if (count < plugin.getConfig().getInt("how many zones")){
                     count += 1;
                 } else {
