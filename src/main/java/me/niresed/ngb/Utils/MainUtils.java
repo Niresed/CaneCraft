@@ -29,20 +29,33 @@ public class MainUtils extends JavaPlugin implements Listener {
     }
 
     public static Location generateLocation(int count){
+        long m = System.currentTimeMillis();
         ArrayList<Integer> coordinate = (ArrayList<Integer>) plugin.getConfig().getIntegerList("zone_" + count);
         System.out.println(coordinate);
         World world = Bukkit.getWorld("world");
         Location location = generateRandomLocation(world, coordinate);
+        int countCane = 0;
         for (int i = 0; i < 30; i++){
+            Block block = location.getWorld().getBlockAt((int) location.getX(), (int) location.getY(), (int) location.getZ());
+            if (block.getType() == Material.SUGAR_CANE){
+                countCane += 1;
+            }
+            if (countCane >= 3){
+                break;
+            }
             boolean isLocationSafeCheck = isLocationSafe(location);
             boolean isLocationHasWaterInNearby = placeSugarCane(location.getWorld().getBlockAt((int) location.getX(), (int) location.getY() - 1, (int) location.getZ()));
             if (!(isLocationSafeCheck) || !(isLocationHasWaterInNearby)){
                 location = generateRandomLocation(world, coordinate);
-            } else{
+            } else {
+                float s = (System.currentTimeMillis() - m) / 1000f;
+                Bukkit.getLogger().info(String.format("Speed: %f", s));
                 return location;
             }
         }
         location.setY(0);
+        float s = (System.currentTimeMillis() - m) / 1000f;
+        Bukkit.getLogger().info(String.format("Speed: %f", s));
         return location;
     }
 
