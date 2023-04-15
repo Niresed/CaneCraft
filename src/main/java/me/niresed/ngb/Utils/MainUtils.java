@@ -49,22 +49,22 @@ public class MainUtils extends JavaPlugin implements Listener {
                 location = generateRandomLocation(world, coordinate);
             } else {
                 float s = (System.currentTimeMillis() - m) / 1000f;
-                Bukkit.getLogger().info(String.format("Speed: %f", s));
                 return location;
             }
         }
         location.setY(0);
         float s = (System.currentTimeMillis() - m) / 1000f;
-        Bukkit.getLogger().info(String.format("Speed: %f", s));
         return location;
     }
 
     private static Location generateRandomLocation(World world, ArrayList<Integer> coordinate){
         int minX = coordinate.get(0), minZ = coordinate.get(1);
         int maxX = coordinate.get(2), maxZ = coordinate.get(3);
+
         int x = (int) Math.floor(Math.random() * (maxX - minX + 1) + minX);
         int y = 0;
         int z = (int) Math.floor(Math.random() * (maxZ - minZ + 1) + minZ);
+
         Location location = new Location(world, x, y, z);
         y = location.getWorld().getHighestBlockYAt(location) + 1;
         location.setY(y);
@@ -75,10 +75,12 @@ public class MainUtils extends JavaPlugin implements Listener {
         int x = location.getBlockX();
         int y = location.getBlockY();
         int z = location.getBlockZ();
+
         Block block = location.getWorld().getBlockAt(x, y, z);
         Block below = location.getWorld().getBlockAt(x, y - 1, z);
         Block above = location.getWorld().getBlockAt(x, y + 1, z);
         Block above2x = location.getWorld().getBlockAt(x, y + 2, z);
+
         return !(!(trueBlocks.contains(below.getType())) || (block.getType().isSolid()) || (above.getType().isSolid()) || (above2x.getType().isSolid())
                 || (block.getType() == Material.SUGAR_CANE));
     }
@@ -90,11 +92,15 @@ public class MainUtils extends JavaPlugin implements Listener {
                 block.getRelative(BlockFace.NORTH),
                 block.getRelative(BlockFace.SOUTH),
         };
+
         for (Block block1 : blocks){
+
             if (block1.getType() == Material.WATER){
                 return true;
             }
+
         }
+
         return false;
     }
 }
