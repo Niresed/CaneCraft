@@ -22,7 +22,6 @@ public final class NGB extends JavaPlugin implements Listener {
         timer();
     }
     public void timer(){
-        long countZones = this.getConfig().getLong("how many zones");
         BukkitScheduler scheduler = getServer().getScheduler();
         TimerEvent event = new TimerEvent(this);
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -30,7 +29,7 @@ public final class NGB extends JavaPlugin implements Listener {
             public void run() {
                 Bukkit.getServer().getPluginManager().callEvent(event);
             }
-        }, 1200L / countZones, 1200L / countZones);
+        }, 120L, 120L);
     }
     @Override
     public void onDisable() {
